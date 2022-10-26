@@ -52,7 +52,7 @@ CREATE TABLE Livre_or (
   date_post TIMESTAMP NOT NULL DEFAULT current_timestamp,
   pseudo_post VARCHAR(50) NOT NULL,
   message_post VARCHAR(500) NOT NULL,
-  ip_post VARCHAR(20) NOT NULL
+  ip_post VARCHAR(100) NOT NULL
 );
 
 
