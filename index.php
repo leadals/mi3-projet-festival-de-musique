@@ -40,6 +40,16 @@
 </head>
 
 <body>
+<?php 
+    try{
+      $user="ldalstein_festivalmusique";
+      $password="Festival22!";
+      $dbh = new PDO('pgsql:host=postgresql-ldalstein.alwaysdata.net dbname=ldalstein_festivalmusique', $user, $password);
+    }
+    catch(PDOException $e){
+      die("erreur de connexion:".$e->getMessage());
+    }
+    ?>
   <!-- En-tête avec barre de navigation -->
   <header class="container">
     <div class="d-flex flex-wrap justify-content-center px-4 py-3 mb-4 border-bottom">
@@ -88,22 +98,70 @@
               <!-- 01/07/2022 -->
               <li>
                 Vendredi 1er juillet 2022 :
-                <span class="donnee-bdd gras">???</span> concerts à partir de
-                <span class="donnee-bdd gras">???</span>
+                <span class="donnee-bdd gras">
+                <?php
+                  $req="select count(*) as nbconcert from Concert
+                  where date_concert = TO_DATE('01/07/2022','DD/MM/YYYY')";
+                  $sth=$dbh->query($req);
+                  $result=$sth->fetchAll(PDO::FETCH_ASSOC); 
+                  echo $result[0]['nbconcert'];                  
+                ?>
+                </span> concerts à partir de
+                <span class="donnee-bdd gras">
+                <?php
+                  $req="select min(heure_debut_concert) as debut from Concert
+                  where date_concert = TO_DATE('01/07/2022','DD/MM/YYYY')";
+                  $sth=$dbh->query($req);
+                  $result=$sth->fetchAll(PDO::FETCH_ASSOC); 
+                    echo $result[0]['debut'];
+                ?>
+                </span>
               </li>
 
               <!-- 02/07/2022 -->
               <li>
                 Samedi 2 juillet 2022 :
-                <span class="donnee-bdd gras">???</span> concerts à partir de
-                <span class="donnee-bdd gras">???</span>
+                <span class="donnee-bdd gras">
+                <?php
+                  $req="select count(*) as nbconcert from Concert
+                  where date_concert = TO_DATE('02/07/2022','DD/MM/YYYY')";
+                  $sth=$dbh->query($req);
+                  $result=$sth->fetchAll(PDO::FETCH_ASSOC); 
+                  echo $result[0]['nbconcert'];                  
+                ?>
+                </span> concerts à partir de
+                <span class="donnee-bdd gras">
+                <?php
+                  $req="select min(heure_debut_concert) as debut from Concert
+                  where date_concert = TO_DATE('02/07/2022','DD/MM/YYYY')";
+                  $sth=$dbh->query($req);
+                  $result=$sth->fetchAll(PDO::FETCH_ASSOC); 
+                    echo $result[0]['debut'];
+                ?>
+                </span>
               </li>
 
               <!-- 03/07/2022 -->
               <li>
                 Dimanche 3 juillet 2022 :
-                <span class="donnee-bdd gras">???</span> concerts à partir de
-                <span class="donnee-bdd gras">???</span>
+                <span class="donnee-bdd gras">
+                <?php
+                  $req="select count(*) as nbconcert from Concert
+                  where date_concert = TO_DATE('03/07/2022','DD/MM/YYYY')";
+                  $sth=$dbh->query($req);
+                  $result=$sth->fetchAll(PDO::FETCH_ASSOC); 
+                  echo $result[0]['nbconcert'];                  
+                ?>
+                </span> concerts à partir de
+                <span class="donnee-bdd gras">
+                <?php
+                  $req="select min(heure_debut_concert) as debut from Concert
+                  where date_concert = TO_DATE('03/07/2022','DD/MM/YYYY')";
+                  $sth=$dbh->query($req);
+                  $result=$sth->fetchAll(PDO::FETCH_ASSOC); 
+                    echo $result[0]['debut'];
+                ?>
+                </span>
               </li>
             </ul>
           </div>
@@ -116,15 +174,18 @@
           <h5 class="card-header">3 scènes sur le plateau du Vercors</h5>
           <div class="card-body">
             <ul>
-              <li>
-                <span class="donnee-bdd gras">???</span> (<span class="donnee-bdd">???</span>)
-              </li>
-              <li>
-                <span class="donnee-bdd gras">???</span> (<span class="donnee-bdd">???</span>)
-              </li>
-              <li>
-                <span class="donnee-bdd gras">???</span> (<span class="donnee-bdd">???</span>)
-              </li>
+              
+                <span class="donnee-bdd">
+                <?php
+                  $req="select nom_scene, code_postal, ville from Scene";
+                  $sth=$dbh->query($req);
+                  $result=$sth->fetchAll(); 
+                  foreach ($result as $row){
+                    echo '<li><b>' . $row['nom_scene']. '</b> ('.
+                    $row['code_postal'].' '. $row['ville'].
+                    ')</li>';
+                  };
+                ?>
             </ul>
           </div>
         </div>
