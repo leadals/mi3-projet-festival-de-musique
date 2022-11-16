@@ -227,15 +227,24 @@
 
       <div class="card">
         <h5 class="card-header">Les 5 derniers messages du Livre d'or</h5>
-
         <div class="card-body text-center">
           <figure>
-            <blockquote class="blockquote">
-              ???Message du livre d'or???
+          <blockquote class="blockquote">
+              <?php
+                $req="select message_post, date_post, pseudo_post from Livre_or";
+                $sth=$dbh->query($req);
+                $result=$sth->fetchAll(); 
+                foreach ($result as $row){
+                  echo "<blockquote class='blockquote'>".$row['message_post']; ?></blockquote>
+                  <figcaption class="blockquote-footer">
+                    <b>
+                      <?php
+                      echo $row['pseudo_post'].'</b> '.$row['date_post'];
+                      ?>
+                  </figcaption><?php
+                };
+              ?>
             </blockquote>
-            <figcaption class="blockquote-footer">
-              <b>???Pseudo???</b> (???Date???)
-            </figcaption>
           </figure>
         </div>
       </div>
