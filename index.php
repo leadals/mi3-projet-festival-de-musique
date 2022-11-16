@@ -49,7 +49,7 @@
     catch(PDOException $e){
       die("erreur de connexion:".$e->getMessage());
     }
-    ?>
+?>
   <!-- En-tête avec barre de navigation -->
   <header class="container">
     <div class="d-flex flex-wrap justify-content-center px-4 py-3 mb-4 border-bottom">
@@ -231,7 +231,8 @@
           <figure>
           <blockquote class="blockquote">
               <?php
-                $req="select message_post, date_post, pseudo_post from Livre_or";
+                $req="select message_post, date_post, pseudo_post from Livre_or
+                order by date_post desc  LIMIT 5";
                 $sth=$dbh->query($req);
                 $result=$sth->fetchAll(); 
                 foreach ($result as $row){

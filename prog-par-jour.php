@@ -40,6 +40,16 @@
 </head>
 
 <body>
+	<?php 
+		try{
+		$user="ldalstein_festivalmusique";
+		$password="Festival22!";
+		$dbh = new PDO('pgsql:host=postgresql-ldalstein.alwaysdata.net dbname=ldalstein_festivalmusique', $user, $password);
+		}
+		catch(PDOException $e){
+		die("erreur de connexion:".$e->getMessage());
+		}
+    ?>
 	<!-- En-tête avec barre de navigation -->
 	<header class="container">
 		<div class="d-flex flex-wrap justify-content-center px-4 py-3 mb-4 border-bottom">
@@ -78,59 +88,92 @@
 		<section class="row my-5">
 			<h2 class="text-primary">Vendredi 1 juillet 2022</h2>
 
-			<article class="col-lg-3 col-md-4 col-sm-6 my-2">
-				<a href="fiche-artiste.php?id=1" class="lien-card">
+			<?php
+                $req="select Artiste.id_artiste as artiste, nom_artiste, date_concert, heure_debut_concert, nom_scene, lien_illustration from Concert, Artiste, Scene
+				    where date_concert = TO_DATE('01/07/2022','DD/MM/YYYY')
+						and Artiste.id_artiste=Concert.id_artiste
+						and Concert.id_scene=Scene.id_scene
+					order by heure_debut_concert";
+                $sth=$dbh->query($req);
+                $result=$sth->fetchAll(PDO::FETCH_ASSOC); 
+				foreach($result as $row){?>
+                <article class="col-lg-3 col-md-4 col-sm-6 my-2">
+				<a href="fiche-artiste.php?id=<?php echo $row['artiste']; ?>" class="lien-card">
 					<div class="card">
-						<img src="https://www.vercorsmusicfestival.com/media/cache/program_artist_large/uploads/artist_image/large/b0144dbf23d597397a0d60bb39ef49ff49f45a69.jpeg" class="card-img-top" alt="Illustration artiste">
+						<img src="<?php echo $row['lien_illustration']; ?>" class="card-img-top" alt="Illustration artiste">
 						<div class="card-body">
-							<h5 class="card-title"><span class='donnee-bdd gras'>Cléa Vincent</span></h5>
+							<h5 class="card-title"><span class='donnee-bdd gras'> <?php echo $row['nom_artiste']; ?></span></h5>
 							<p class="card-text">
-								Heure de début : <span class='donnee-bdd'>18H00</span><br>
-								Scène : <span class='donnee-bdd'>La Terrasse</span>
+								Heure de début : <span class='donnee-bdd'> <?php echo $row['heure_debut_concert']; ?></span><br>
+								Scène : <span class='donnee-bdd'><?php echo $row['nom_scene']; ?></span>
 							</p>
 						</div>
 					</div>
 				</a>
 			</article>
+			<?php ;}
+            ?>
 
 		</section>
 
 		<!-- 02/07/2022 -->
 		<section class="row my-5">
 			<h2 class="text-primary">Samedi 2 juillet 2022</h2>
-			<article class="col-lg-3 col-md-4 col-sm-6 my-2">
-				<a href="fiche-artiste.php?id=7" class="lien-card">
+			<?php
+                $req="select Artiste.id_artiste as artiste, nom_artiste, date_concert, heure_debut_concert, nom_scene, lien_illustration from Concert, Artiste, Scene
+				    where date_concert = TO_DATE('02/07/2022','DD/MM/YYYY')
+						and Artiste.id_artiste=Concert.id_artiste
+						and Concert.id_scene=Scene.id_scene
+					order by heure_debut_concert";
+                $sth=$dbh->query($req);
+                $result=$sth->fetchAll(PDO::FETCH_ASSOC); 
+				foreach($result as $row){?>
+                <article class="col-lg-3 col-md-4 col-sm-6 my-2">
+				<a href="fiche-artiste.php?id=<?php echo $row['artiste']; ?>" class="lien-card">
 					<div class="card">
-						<img src="https://www.vercorsmusicfestival.com/media/cache/program_artist_large/uploads/artist_image/large/7c50b32e3b1e42208fdc6df1ad26106c7cbd88d0.jpeg" class="card-img-top" alt="Illustration artiste">
+						<img src="<?php echo $row['lien_illustration']; ?>" class="card-img-top" alt="Illustration artiste">
 						<div class="card-body">
-							<h5 class="card-title"><span class='donnee-bdd gras'>ARABELLA</span></h5>
+							<h5 class="card-title"><span class='donnee-bdd gras'> <?php echo $row['nom_artiste']; ?></span></h5>
 							<p class="card-text">
-								Heure de début : <span class='donnee-bdd'>14H00</span><br>
-								Scène : <span class='donnee-bdd'>L'Avant Scène</span>
+								Heure de début : <span class='donnee-bdd'> <?php echo $row['heure_debut_concert']; ?></span><br>
+								Scène : <span class='donnee-bdd'><?php echo $row['nom_scene']; ?></span>
 							</p>
 						</div>
 					</div>
 				</a>
 			</article>
+			<?php ;}
+            ?>
 		</section>
 
 		<!-- 03/07/2022 -->
 		<section class="row my-5">
 			<h2 class="text-primary">Dimanche 3 juillet 2022</h2>
-			<article class="col-lg-3 col-md-4 col-sm-6 my-2">
-				<a href="fiche-artiste.php?id=15" class="lien-card">
+			<?php
+                $req="select Artiste.id_artiste as artiste, nom_artiste, date_concert, heure_debut_concert, nom_scene, lien_illustration from Concert, Artiste, Scene
+				    where date_concert = TO_DATE('03/07/2022','DD/MM/YYYY')
+						and Artiste.id_artiste=Concert.id_artiste
+						and Concert.id_scene=Scene.id_scene
+					order by heure_debut_concert";
+                $sth=$dbh->query($req);
+                $result=$sth->fetchAll(PDO::FETCH_ASSOC); 
+				foreach($result as $row){?>
+                <article class="col-lg-3 col-md-4 col-sm-6 my-2">
+				<a href="fiche-artiste.php?id=<?php echo $row['artiste']; ?>" class="lien-card">
 					<div class="card">
-						<img src="https://www.vercorsmusicfestival.com/media/cache/program_artist_large/uploads/artist_image/large/4afc24a470798044c26e489b85484df6009aa88d.jpeg" class="card-img-top" alt="Illustration artiste">
+						<img src="<?php echo $row['lien_illustration']; ?>" class="card-img-top" alt="Illustration artiste">
 						<div class="card-body">
-							<h5 class="card-title"><span class='donnee-bdd gras'>Adèle & Robin</span></h5>
+							<h5 class="card-title"><span class='donnee-bdd gras'> <?php echo $row['nom_artiste']; ?></span></h5>
 							<p class="card-text">
-								Heure de début : <span class='donnee-bdd'>12H00</span><br>
-								Scène : <span class='donnee-bdd'>L'Avant Scène</span>
+								Heure de début : <span class='donnee-bdd'> <?php echo $row['heure_debut_concert']; ?></span><br>
+								Scène : <span class='donnee-bdd'><?php echo $row['nom_scene']; ?></span>
 							</p>
 						</div>
 					</div>
 				</a>
 			</article>
+			<?php ;}
+            ?>
 		</section>
 	</main>
 

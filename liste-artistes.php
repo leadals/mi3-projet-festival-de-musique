@@ -93,13 +93,13 @@
                 $result=$sth->fetchAll(); 
                 foreach ($result as $row){
                   ?> <div class="col-lg-3 col-md-4 col-sm-6 my-2">
-				  <a href="fiche-artiste.php?id=<?php echo $row['artiste'] ?>" class="lien-card">
+				  <a href="fiche-artiste.php?id=<?php echo $row['artiste']; ?>" class="lien-card">
 					  <div class="card">
-						  <img src="<?php echo $row['lien_illustration'] ?>" class="card-img-top" alt="Illustration artiste">
+						  <img src="<?php echo $row['lien_illustration']; ?>" class="card-img-top" alt="Illustration artiste">
 						  <div class="card-body">
-							  <h5 class="card-title"><span class='donnee-bdd gras'> <?php echo $row['nom_artiste'] ?></span></h5>
+							  <h5 class="card-title"><span class='donnee-bdd gras'> <?php echo $row['nom_artiste']; ?></span></h5>
 							  <p class="card-text">
-								  Jour du concert : <span class='donnee-bdd'> <?php echo $row['date_concert'] ?> </span>
+								  Jour du concert : <span class='donnee-bdd'> <?php echo $row['date_concert']; ?> </span>
 							  </p>
 						  </div>
 					  </div>
