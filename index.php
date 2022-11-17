@@ -240,7 +240,7 @@
           <blockquote class="blockquote">
             <!-- Récupération des 5 derniers messages du livre d'or, avec le pseudo de leur auteur ainsi que la date du post, avec le post le plus récent en tête de liste -->
               <?php
-                $req="select message_post, date_post, pseudo_post from Livre_or
+                $req="select message_post, TO_CHAR(date_post::date, 'dd/mm/yyyy') as date, pseudo_post from Livre_or
                 order by date_post desc  LIMIT 5";
                 $sth=$dbh->query($req);
                 $result=$sth->fetchAll(); 
@@ -249,7 +249,7 @@
                   <figcaption class="blockquote-footer">
                     <b>
                       <?php
-                      echo $row['pseudo_post'].'</b> '.$row['date_post'];
+                      echo $row['pseudo_post'].'</b> ('.$row['date'].')';
                       ?>
                   </figcaption><?php
                 };
