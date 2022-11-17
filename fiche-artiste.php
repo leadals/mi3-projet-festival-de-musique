@@ -84,41 +84,32 @@
 	<main class="container px-5 mb-5">
 		<h1>Fiche artiste</h1>
 
-		<h2 class="display-4 text-center fw-bolder">Ben Mazué</h2>
-
-		<img class="rounded-pill mx-auto d-block my-4" src="https://www.vercorsmusicfestival.com/media/cache/program_artist_large/uploads/artist_image/large/da8f87ecab95b2bc9a5aa536082386e5cbbab405.jpeg" alt="Illustration de l'artiste Ben Mazué">
-
-		<hr>
-		<h3>Vidéo(s) de l'artiste</h3>
-		<article class="card m-4">
-			<div class="card-body">
-				<h4>Ben Mazué - Quand je marche</h4>
-				<div class="ratio ratio-16x9 mt-3">
-					<iframe src="https://www.youtube.com/embed/29gOHmidswU" title="Vidéo YouTube Ben Mazué - Quand je marche" allowfullscreen></iframe>
-				</div>
-			</div>
-		</article>
-		<article class="card m-4">
-			<div class="card-body">
-				<h4>Ben Mazué - Les jours heureux</h4>
-				<div class="ratio ratio-16x9 mt-3">
-					<iframe src="https://www.youtube.com/embed/tpoxa-J7etk" title="Vidéo YouTube Ben Mazué - Les jours heureux" allowfullscreen></iframe>
-				</div>
-			</div>
-		</article>
-
-		<hr>
-		<p class="fst-italic">Pour plus d'informations, vous pouvez aller voir <a href="https://www.vercorsmusicfestival.com/artiste/ben-mazue/" target="_blank">la page de l'artiste sur le site officiel du festival</a>.</p>
 		<?php
-			$pseudo = $_GET["pseudo"] ?? NULL;
-			$req="select id_artiste, nom_artiste from Artiste";
+			$id = $_GET["id"] ?? NULL;
+			$req="select Artiste.id_artiste, nom_artiste, lien_illustration, lien_video_youtube, nom_video, lien_page from Artiste, Video
+				where Artiste.id_artiste=Video.id_artiste
+					and Artiste.id_artiste = $id";
 			$sth=$dbh->query($req);
-			$result=$sth->fetchAll(); ?>
-			<h2 class="display-4 text-center fw-bolder"><?php echo foreach($result as $row){ ?></h2>
-			<?php
-			
+			$result=$sth->fetchAll();?>
+			<h2 class="display-4 text-center fw-bolder"><?php echo $result[0]['nom_artiste'];?></h2>
+			<img class="rounded-pill mx-auto d-block my-4" src="<?php echo $result[0]['lien_illustration'] ?>" alt="Illustration de l'artiste Ben Mazué">
+			<hr>
+			<h3>Vidéo(s) de l'artiste</h3>
+			<?php foreach($result as $row){
+				$lien_explode = explode("/", $row['lien_video_youtube']);
+				$lien_video = $lien_explode[0].'//'.$lien_explode[2].'/'.'embed/'.$lien_explode[3];?>
+			<article class="card m-4">
+				<div class="card-body">
+					<h4><?php echo $row['nom_video'] ?></h4>
+					<div class="ratio ratio-16x9 mt-3">
+					<iframe src="<?php echo $lien_video ?>" title="<?php echo $row['nom_video'] ?>" allowfullscreen></iframe>
+				</div>
+				</div>
+			</article>
+			<?php ;} ?>
+			<hr>
+			<p class="fst-italic">Pour plus d'informations, vous pouvez aller voir <a href="<?php echo $result[0]['lien_page'] ?>" target="_blank">la page de l'artiste sur le site officiel du festival</a>.</p>
 
-		?>
 	</main>
 
 	<!-- Inclusion du JS de Bootstrap -->
