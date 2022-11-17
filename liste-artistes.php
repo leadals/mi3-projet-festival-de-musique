@@ -88,7 +88,7 @@
 		<div class="row my-5">
 			<!-- Récupération de l'identifiant, du nom et du lien d'illustration des artistes, ainsi que la date de leur concert -->
 			<?php
-                $req="select Artiste.id_artiste as artiste, nom_artiste, lien_illustration, date_concert from Artiste, Concert
+                $req="select Artiste.id_artiste as artiste, nom_artiste, lien_illustration, TO_CHAR(date_concert::date, 'dd/mm/yyyy') as date_concert from Artiste, Concert
 					where Artiste.id_artiste=Concert.id_artiste
 					order by nom_artiste asc";
                 $sth=$dbh->query($req);
