@@ -40,6 +40,17 @@
 </head>
 
 <body>
+	<!-- Connexion à la base de données -->
+	<?php 
+		try{
+		$user="ldalstein_festivalmusique";
+		$password="Festival22!";
+		$dbh = new PDO('pgsql:host=postgresql-ldalstein.alwaysdata.net dbname=ldalstein_festivalmusique', $user, $password);
+		}
+		catch(PDOException $e){
+		die("erreur de connexion:".$e->getMessage());
+		}
+    ?>
 	<!-- En-tête avec barre de navigation -->
 	<header class="container">
 		<div class="d-flex flex-wrap justify-content-center px-4 py-3 mb-4 border-bottom">
@@ -98,6 +109,16 @@
 
 		<hr>
 		<p class="fst-italic">Pour plus d'informations, vous pouvez aller voir <a href="https://www.vercorsmusicfestival.com/artiste/ben-mazue/" target="_blank">la page de l'artiste sur le site officiel du festival</a>.</p>
+		<?php
+			$pseudo = $_GET["pseudo"] ?? NULL;
+			$req="select id_artiste, nom_artiste from Artiste";
+			$sth=$dbh->query($req);
+			$result=$sth->fetchAll(); ?>
+			<h2 class="display-4 text-center fw-bolder"><?php echo foreach($result as $row){ ?></h2>
+			<?php
+			
+
+		?>
 	</main>
 
 	<!-- Inclusion du JS de Bootstrap -->
