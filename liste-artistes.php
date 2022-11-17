@@ -40,6 +40,7 @@
 </head>
 
 <body>
+	<!-- Connexion à la base de données -->
 	<?php 
 		try{
 		$user="ldalstein_festivalmusique";
@@ -85,6 +86,7 @@
 		<p class="lead">Cette page affiche la liste des artistes qui se produisent pendant le festival 2022 (ordre alphabétique).</p>
 
 		<div class="row my-5">
+			<!-- Récupération de l'identifiant, du nom et du lien d'illustration des artistes, ainsi que la date de leur concert -->
 			<?php
                 $req="select Artiste.id_artiste as artiste, nom_artiste, lien_illustration, date_concert from Artiste, Concert
 					where Artiste.id_artiste=Concert.id_artiste
