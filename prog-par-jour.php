@@ -40,6 +40,7 @@
 </head>
 
 <body>
+	<!-- Connexion à la base de données -->
 	<?php 
 		try{
 		$user="ldalstein_festivalmusique";
@@ -87,7 +88,7 @@
 		<!-- 01/07/2022 -->
 		<section class="row my-5">
 			<h2 class="text-primary">Vendredi 1 juillet 2022</h2>
-
+			<!-- Récupération de l'identifiant, du nom et du lie d'illustration de l'artiste,  la date et l'heure de début du concert ainsi que le nom de la scène pour le 1er juillet 2022 -->
 			<?php
                 $req="select Artiste.id_artiste as artiste, nom_artiste, date_concert, heure_debut_concert, nom_scene, lien_illustration from Concert, Artiste, Scene
 				    where date_concert = TO_DATE('01/07/2022','DD/MM/YYYY')
@@ -119,6 +120,7 @@
 		<!-- 02/07/2022 -->
 		<section class="row my-5">
 			<h2 class="text-primary">Samedi 2 juillet 2022</h2>
+			<!-- Récupération de l'identifiant, du nom et du lie d'illustration de l'artiste,  la date et l'heure de début du concert ainsi que le nom de la scène pour le 2 juillet 2022 -->
 			<?php
                 $req="select Artiste.id_artiste as artiste, nom_artiste, date_concert, heure_debut_concert, nom_scene, lien_illustration from Concert, Artiste, Scene
 				    where date_concert = TO_DATE('02/07/2022','DD/MM/YYYY')
@@ -149,6 +151,7 @@
 		<!-- 03/07/2022 -->
 		<section class="row my-5">
 			<h2 class="text-primary">Dimanche 3 juillet 2022</h2>
+			<!-- Récupération de l'identifiant, du nom et du lie d'illustration de l'artiste,  la date et l'heure de début du concert ainsi que le nom de la scène pour le 3 juillet 2022 -->
 			<?php
                 $req="select Artiste.id_artiste as artiste, nom_artiste, date_concert, heure_debut_concert, nom_scene, lien_illustration from Concert, Artiste, Scene
 				    where date_concert = TO_DATE('03/07/2022','DD/MM/YYYY')
