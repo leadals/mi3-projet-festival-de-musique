@@ -40,6 +40,7 @@
 </head>
 
 <body>
+<!-- Connexion à la base de données -->
 <?php 
     try{
       $user="ldalstein_festivalmusique";
@@ -99,6 +100,7 @@
               <li>
                 Vendredi 1er juillet 2022 :
                 <span class="donnee-bdd gras">
+                <!-- Récupération du nombre de concerts du 1er juillet 2022 -->
                 <?php
                   $req="select count(*) as nbconcert from Concert
                   where date_concert = TO_DATE('01/07/2022','DD/MM/YYYY')";
@@ -108,6 +110,7 @@
                 ?>
                 </span> concerts à partir de
                 <span class="donnee-bdd gras">
+                <!-- Récupération de l'heure de début du 1er concert du 1er juillet 2022 -->
                 <?php
                   $req="select min(heure_debut_concert) as debut from Concert
                   where date_concert = TO_DATE('01/07/2022','DD/MM/YYYY')";
@@ -122,6 +125,7 @@
               <li>
                 Samedi 2 juillet 2022 :
                 <span class="donnee-bdd gras">
+                <!-- Récupération du nombre de concerts du 2 juillet 2022 -->
                 <?php
                   $req="select count(*) as nbconcert from Concert
                   where date_concert = TO_DATE('02/07/2022','DD/MM/YYYY')";
@@ -131,6 +135,7 @@
                 ?>
                 </span> concerts à partir de
                 <span class="donnee-bdd gras">
+                <!-- Récupération de l'heure de début du 1er concert du 2 juillet 2022 -->
                 <?php
                   $req="select min(heure_debut_concert) as debut from Concert
                   where date_concert = TO_DATE('02/07/2022','DD/MM/YYYY')";
@@ -145,6 +150,7 @@
               <li>
                 Dimanche 3 juillet 2022 :
                 <span class="donnee-bdd gras">
+                <!-- Récupération du nombre de concerts du 3 juillet 2022 -->
                 <?php
                   $req="select count(*) as nbconcert from Concert
                   where date_concert = TO_DATE('03/07/2022','DD/MM/YYYY')";
@@ -154,6 +160,7 @@
                 ?>
                 </span> concerts à partir de
                 <span class="donnee-bdd gras">
+                <!-- Récupération de l'heure de début du 1er concert du 3 juillet 2022 -->
                 <?php
                   $req="select min(heure_debut_concert) as debut from Concert
                   where date_concert = TO_DATE('03/07/2022','DD/MM/YYYY')";
@@ -176,6 +183,7 @@
             <ul>
               
                 <span class="donnee-bdd">
+                <!-- Récupération du nom des différentes scènes, de leur code postal ainsi que leur ville -->
                 <?php
                   $req="select nom_scene, code_postal, ville from Scene";
                   $sth=$dbh->query($req);
@@ -230,6 +238,7 @@
         <div class="card-body text-center">
           <figure>
           <blockquote class="blockquote">
+            <!-- Récupération des 5 derniers messages du livre d'or, avec le pseudo de leur auteur ainsi que la date du post, avec le post le plus récent en tête de liste -->
               <?php
                 $req="select message_post, date_post, pseudo_post from Livre_or
                 order by date_post desc  LIMIT 5";
